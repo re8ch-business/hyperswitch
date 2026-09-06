@@ -67,6 +67,7 @@ pub enum Connector {
     Adyen,
     Affirm,
     Airwallex,
+    Alipaycn,
     Amazonpay,
     Archipel,
     Authorizedotnet,
@@ -202,6 +203,7 @@ pub enum Connector {
     Worldpay,
     Worldpayvantiv,
     Worldpayxml,
+    Wechatpaycn,
     Worldpaymodular,
     Signifyd,
     Plaid,
@@ -317,6 +319,7 @@ impl Connector {
             | Self::Affirm
             | Self::Adyenplatform
             | Self::Airwallex
+            | Self::Alipaycn
             | Self::Amazonpay
             | Self::Authorizedotnet
             | Self::Bambora
@@ -425,6 +428,7 @@ impl Connector {
             | Self::Worldpaymodular
             | Self::Worldpayvantiv
             | Self::Worldpayxml
+            | Self::Wechatpaycn
             | Self::Xendit
             | Self::Zen
             | Self::Zsl

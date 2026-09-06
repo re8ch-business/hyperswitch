@@ -267,6 +267,7 @@ pub struct ConnectorConfig {
     #[cfg(feature = "payouts")]
     pub adyenplatform_payout: Option<ConnectorTomlConfig>,
     pub airwallex: Option<ConnectorTomlConfig>,
+    pub alipaycn: Option<ConnectorTomlConfig>,
     pub amazonpay: Option<ConnectorTomlConfig>,
     pub archipel: Option<ConnectorTomlConfig>,
     pub authorizedotnet: Option<ConnectorTomlConfig>,
@@ -419,6 +420,7 @@ pub struct ConnectorConfig {
     pub worldpay_payout: Option<ConnectorTomlConfig>,
     pub worldpayvantiv: Option<ConnectorTomlConfig>,
     pub worldpayxml: Option<ConnectorTomlConfig>,
+    pub wechatpaycn: Option<ConnectorTomlConfig>,
     #[cfg(feature = "payouts")]
     pub worldpayxml_payout: Option<ConnectorTomlConfig>,
     pub xendit: Option<ConnectorTomlConfig>,
@@ -550,6 +552,7 @@ impl ConnectorConfig {
             Connector::Affirm => Ok(connector_data.affirm),
             Connector::Adyenplatform => Err("Use get_payout_connector_config".to_string()),
             Connector::Airwallex => Ok(connector_data.airwallex),
+            Connector::Alipaycn => Ok(connector_data.alipaycn),
             Connector::Amazonpay => Ok(connector_data.amazonpay),
             Connector::Archipel => Ok(connector_data.archipel),
             Connector::Authorizedotnet => Ok(connector_data.authorizedotnet),
@@ -674,6 +677,7 @@ impl ConnectorConfig {
             Connector::Worldpaymodular => Ok(connector_data.worldpaymodular),
             Connector::Worldpayvantiv => Ok(connector_data.worldpayvantiv),
             Connector::Worldpayxml => Ok(connector_data.worldpayxml),
+            Connector::Wechatpaycn => Ok(connector_data.wechatpaycn),
             Connector::Zen => Ok(connector_data.zen),
             Connector::Zsl => Ok(connector_data.zsl),
             #[cfg(feature = "dummy_connector")]

@@ -4,6 +4,7 @@ pub mod adyen;
 pub mod adyenplatform;
 pub mod affirm;
 pub mod airwallex;
+pub mod alipaycn;
 pub mod amazonpay;
 pub mod archipel;
 pub mod authipay;
@@ -137,6 +138,7 @@ pub mod tsys_transit;
 pub mod unified_authentication_service;
 pub mod vgs;
 pub mod volt;
+pub mod wechatpaycn;
 pub mod wellsfargo;
 pub mod wellsfargopayout;
 pub mod wise;
@@ -153,13 +155,13 @@ pub mod zsl;
 pub use self::dummyconnector::DummyConnector;
 pub use self::{
     absa_sanlam::AbsaSanlam, aci::Aci, adyen::Adyen, adyenplatform::Adyenplatform, affirm::Affirm,
-    airwallex::Airwallex, amazonpay::Amazonpay, archipel::Archipel, authipay::Authipay,
-    authorizedotnet::Authorizedotnet, bambora::Bambora, bamboraapac::Bamboraapac,
-    bankofamerica::Bankofamerica, barclaycard::Barclaycard, billwerk::Billwerk, bitpay::Bitpay,
-    blackhawknetwork::Blackhawknetwork, bluesnap::Bluesnap, boku::Boku, braintree::Braintree,
-    breadpay::Breadpay, calida::Calida, cashtocode::Cashtocode, celero::Celero,
-    chargebee::Chargebee, checkbook::Checkbook, checkout::Checkout, coinbase::Coinbase,
-    coingate::Coingate, cryptopay::Cryptopay, ctp_mastercard::CtpMastercard,
+    airwallex::Airwallex, alipaycn::Alipaycn, amazonpay::Amazonpay, archipel::Archipel,
+    authipay::Authipay, authorizedotnet::Authorizedotnet, bambora::Bambora,
+    bamboraapac::Bamboraapac, bankofamerica::Bankofamerica, barclaycard::Barclaycard,
+    billwerk::Billwerk, bitpay::Bitpay, blackhawknetwork::Blackhawknetwork, bluesnap::Bluesnap,
+    boku::Boku, braintree::Braintree, breadpay::Breadpay, calida::Calida, cashtocode::Cashtocode,
+    celero::Celero, chargebee::Chargebee, checkbook::Checkbook, checkout::Checkout,
+    coinbase::Coinbase, coingate::Coingate, cryptopay::Cryptopay, ctp_mastercard::CtpMastercard,
     custombilling::Custombilling, cybersource::Cybersource,
     cybersourcedecisionmanager::Cybersourcedecisionmanager, datatrans::Datatrans,
     deutschebank::Deutschebank, digitalvirgo::Digitalvirgo, dlocal::Dlocal, dwolla::Dwolla,
@@ -186,7 +188,8 @@ pub use self::{
     truelayer::Truelayer, trustly::Trustly, trustpay::Trustpay, trustpayments::Trustpayments,
     tsys::Tsys, tsys_transit::TsysTransit,
     unified_authentication_service::UnifiedAuthenticationService, vgs::Vgs, volt::Volt,
-    wellsfargo::Wellsfargo, wellsfargopayout::Wellsfargopayout, wise::Wise, worldline::Worldline,
-    worldpay::Worldpay, worldpaymodular::Worldpaymodular, worldpayvantiv::Worldpayvantiv,
-    worldpayxml::Worldpayxml, xendit::Xendit, zen::Zen, zift::Zift, zsl::Zsl,
+    wechatpaycn::Wechatpaycn, wellsfargo::Wellsfargo, wellsfargopayout::Wellsfargopayout,
+    wise::Wise, worldline::Worldline, worldpay::Worldpay, worldpaymodular::Worldpaymodular,
+    worldpayvantiv::Worldpayvantiv, worldpayxml::Worldpayxml, xendit::Xendit, zen::Zen, zift::Zift,
+    zsl::Zsl,
 };

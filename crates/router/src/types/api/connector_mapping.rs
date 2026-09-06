@@ -119,6 +119,12 @@ impl ConnectorData {
                 enums::Connector::Airwallex => {
                     Ok(ConnectorEnum::Old(Box::new(connector::Airwallex::new())))
                 }
+                enums::Connector::Alipaycn => {
+                    Ok(ConnectorEnum::Old(Box::new(connector::Alipaycn::new())))
+                }
+                enums::Connector::Wechatpaycn => {
+                    Ok(ConnectorEnum::Old(Box::new(connector::Wechatpaycn::new())))
+                }
                 enums::Connector::Amazonpay => {
                     Ok(ConnectorEnum::Old(Box::new(connector::Amazonpay::new())))
                 }
