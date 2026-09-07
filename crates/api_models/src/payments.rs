@@ -5615,10 +5615,33 @@ pub struct PaypalRedirection {
 pub struct AliPayQr {}
 
 #[derive(
+    Eq,
+    PartialEq,
+    Clone,
+    Copy,
+    Debug,
+    Default,
+    serde::Deserialize,
+    serde::Serialize,
+    ToSchema,
+    SmithyModel,
+)]
+#[serde(rename_all = "snake_case")]
+#[smithy(namespace = "com.hyperswitch.smithy.types")]
+pub enum AlipayCnChannel {
+    #[default]
+    Page,
+    Wap,
+}
+
+#[derive(
     Eq, PartialEq, Clone, Debug, serde::Deserialize, serde::Serialize, ToSchema, SmithyModel,
 )]
 #[smithy(namespace = "com.hyperswitch.smithy.types")]
-pub struct AliPayRedirection {}
+pub struct AliPayRedirection {
+    /// Mainland Alipay product channel. Defaults to desktop page pay.
+    pub channel: Option<AlipayCnChannel>,
+}
 
 #[derive(
     Eq, PartialEq, Clone, Debug, serde::Deserialize, serde::Serialize, ToSchema, SmithyModel,

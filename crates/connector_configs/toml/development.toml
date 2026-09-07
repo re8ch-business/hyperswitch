@@ -8884,3 +8884,20 @@ payment_method_type = "Discover"
 payment_method_type = "DinersClub"
 [[givepayments.debit]]
 payment_method_type = "UnionPay"
+
+[alipaycn]
+[alipaycn.connector_auth.SignatureKey]
+api_key = "Alipay App ID"
+key1 = "Alipay public key"
+api_secret = "Application private key"
+[[alipaycn.wallet]]
+payment_method_type = "AliPay"
+
+[wechatpaycn]
+[wechatpaycn.connector_auth.MultiAuthKey]
+api_key = "Merchant ID"
+key1 = "App ID"
+api_secret = "Merchant private key"
+key2 = "Merchant certificate serial number"
+[[wechatpaycn.wallet]]
+payment_method_type = "WeChatPay"

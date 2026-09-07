@@ -18,6 +18,7 @@ pub struct ConnectorAuthentication {
     #[cfg(feature = "payouts")]
     pub adyen_uk: Option<SignatureKey>,
     pub airwallex: Option<BodyKey>,
+    pub alipaycn: Option<SignatureKey>,
     pub amazonpay: Option<BodyKey>,
     pub archipel: Option<NoKey>,
     pub authipay: Option<SignatureKey>,
@@ -155,6 +156,7 @@ pub struct ConnectorAuthentication {
     pub worldpaymodular: Option<HeaderKey>,
     pub worldpayvantiv: Option<HeaderKey>,
     pub worldpayxml: Option<HeaderKey>,
+    pub wechatpaycn: Option<MultiAuthKey>,
     pub xendit: Option<HeaderKey>,
     pub zift: Option<HeaderKey>,
     pub worldline: Option<SignatureKey>,

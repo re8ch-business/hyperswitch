@@ -1104,8 +1104,18 @@ pub struct PaypalRedirection {
 #[derive(Eq, PartialEq, Clone, Debug, serde::Deserialize, serde::Serialize)]
 pub struct AliPayQr {}
 
+#[derive(Eq, PartialEq, Clone, Copy, Debug, Default, serde::Deserialize, serde::Serialize)]
+#[serde(rename_all = "snake_case")]
+pub enum AlipayCnChannel {
+    #[default]
+    Page,
+    Wap,
+}
+
 #[derive(Eq, PartialEq, Clone, Debug, serde::Deserialize, serde::Serialize)]
-pub struct AliPayRedirection {}
+pub struct AliPayRedirection {
+    pub channel: Option<AlipayCnChannel>,
+}
 
 #[derive(Eq, PartialEq, Clone, Debug, serde::Deserialize, serde::Serialize)]
 pub struct AliPayHkRedirection {}
@@ -2441,8 +2451,13 @@ impl From<api_models::payments::WalletData> for WalletData {
     fn from(value: api_models::payments::WalletData) -> Self {
         match value {
             api_models::payments::WalletData::AliPayQr(_) => Self::AliPayQr(Box::new(AliPayQr {})),
-            api_models::payments::WalletData::AliPayRedirect(_) => {
-                Self::AliPayRedirect(AliPayRedirection {})
+            api_models::payments::WalletData::AliPayRedirect(data) => {
+                Self::AliPayRedirect(AliPayRedirection {
+                    channel: data.channel.map(|channel| match channel {
+                        api_models::payments::AlipayCnChannel::Page => AlipayCnChannel::Page,
+                        api_models::payments::AlipayCnChannel::Wap => AlipayCnChannel::Wap,
+                    }),
+                })
             }
             api_models::payments::WalletData::AliPayHkRedirect(_) => {
                 Self::AliPayHkRedirect(AliPayHkRedirection {})

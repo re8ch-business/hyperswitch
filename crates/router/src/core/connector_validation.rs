@@ -92,6 +92,15 @@ impl ConnectorAuthTypeAndMetadataValidation<'_> {
                 airwallex::transformers::AirwallexAuthType::try_from(self.auth_type)?;
                 Ok(())
             }
+            api_enums::Connector::Alipaycn => {
+                alipaycn::transformers::AlipaycnAuthType::try_from(self.auth_type)?;
+                Ok(())
+            }
+            api_enums::Connector::Wechatpaycn => {
+                wechatpaycn::transformers::WechatpaycnAuthType::try_from(self.auth_type)?;
+                wechatpaycn::transformers::WechatpaycnMetadata::try_from(self.connector_meta_data)?;
+                Ok(())
+            }
             api_enums::Connector::Amazonpay => {
                 amazonpay::transformers::AmazonpayAuthType::try_from(self.auth_type)?;
                 Ok(())
