@@ -1,3 +1,6 @@
+permissions:
+  contents: read
+
 name: "CI Nix"
 on:
   push:
@@ -13,5 +16,5 @@ jobs:
       matrix:
         system: [x86_64-linux, aarch64-darwin]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
       - run: om ci run --extra-access-tokens ${{ secrets.GITHUB_TOKEN }} --systems "${{ matrix.system }}"

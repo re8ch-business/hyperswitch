@@ -46,14 +46,14 @@ jobs:
       - name: Generate a token
         if: ${{ github.event.pull_request.head.repo.full_name == github.event.pull_request.base.repo.full_name }}
         id: generate_token
-        uses: actions/create-github-app-token@v3
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
         with:
           app-id: ${{ secrets.HYPERSWITCH_BOT_APP_ID }}
           private-key: ${{ secrets.HYPERSWITCH_BOT_APP_PRIVATE_KEY }}
 
       - name: Checkout repository with token
         if: ${{ github.event.pull_request.head.repo.full_name == github.event.pull_request.base.repo.full_name }}
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.ref }}
@@ -61,10 +61,10 @@ jobs:
 
       - name: Checkout repository for fork
         if: ${{ github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name }}
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
 
       - name: Install Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:
           node-version: "24"
 
@@ -155,30 +155,30 @@ jobs:
 
       - name: Checkout repository
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
 
       - name: Install mold linker
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: rui314/setup-mold@v1
+        uses: rui314/setup-mold@10ca16bf91dc22e05ebdc935cad9c75ea248f621
         with:
           make-default: true
 
       - name: Install Rust
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: dtolnay/rust-toolchain@master
+        uses: dtolnay/rust-toolchain@02cb101ec7c40f2c49e1d9714d64511d8e1b74de
         with:
           toolchain: stable 2 weeks ago
           components: clippy
 
       - name: Install Protoc
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: arduino/setup-protoc@v3
+        uses: arduino/setup-protoc@c65c819552d16ad3c9b72d9dfd5ba5237b9c906b
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install sccache
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: taiki-e/install-action@v2
+        uses: taiki-e/install-action@4cef1412cce204788f482e778a0b9187f9626a29
         with:
           tool: sccache
           checksum: true
@@ -189,7 +189,7 @@ jobs:
 
       - name: Upload binary artifact
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: hyperswitch-server
           overwrite: true
@@ -286,25 +286,25 @@ jobs:
 
       - name: Checkout repository
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
 
       - name: Install Rust
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: dtolnay/rust-toolchain@master
+        uses: dtolnay/rust-toolchain@02cb101ec7c40f2c49e1d9714d64511d8e1b74de
         with:
           toolchain: stable 2 weeks ago
           components: rustfmt
 
       - name: Install sccache
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: taiki-e/install-action@v2
+        uses: taiki-e/install-action@4cef1412cce204788f482e778a0b9187f9626a29
         with:
           tool: sccache
           checksum: true
 
       - name: Download hyperswitch server artifact
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
           name: hyperswitch-server
           path: target/debug
@@ -347,7 +347,7 @@ jobs:
 
       - name: Install Diesel CLI
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: baptiste0928/cargo-install@v3.4.0
+        uses: baptiste0928/cargo-install@f204293d9709061b7bc1756fec3ec4e2cd57dec0
         with:
           crate: diesel_cli
           features: postgres
@@ -355,14 +355,14 @@ jobs:
 
       - name: Install Just
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: taiki-e/install-action@v2
+        uses: taiki-e/install-action@4cef1412cce204788f482e778a0b9187f9626a29
         with:
           tool: just
           checksum: true
 
       - name: Install Node.js
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:
           node-version: "24"
 
@@ -442,7 +442,7 @@ jobs:
 
       - name: Upload server logs on failure
         if: env.RUN_TESTS == 'true' && failure()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: ${{ matrix.batch.server_logs_artifact }}
           path: ${{ env.SERVER_LOG_PATH }}
@@ -451,7 +451,7 @@ jobs:
 
       - name: Upload Cypress test results
         if: env.RUN_TESTS == 'true' && failure()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: ${{ matrix.batch.report_artifact_name }}
           path: |
@@ -576,22 +576,22 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
 
       - name: Install Rust
-        uses: dtolnay/rust-toolchain@master
+        uses: dtolnay/rust-toolchain@02cb101ec7c40f2c49e1d9714d64511d8e1b74de
         with:
           toolchain: stable 2 weeks ago
           components: rustfmt
 
       - name: Install sccache
-        uses: taiki-e/install-action@v2
+        uses: taiki-e/install-action@4cef1412cce204788f482e778a0b9187f9626a29
         with:
           tool: sccache
           checksum: true
 
       - name: Download hyperswitch server artifact
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
           name: hyperswitch-server
           path: target/debug
@@ -629,20 +629,20 @@ jobs:
           echo "CYPRESS_ADMINAPIKEY=${LOCAL_ADMIN_API_KEY}" >> $GITHUB_ENV
 
       - name: Install Diesel CLI
-        uses: baptiste0928/cargo-install@v3.4.0
+        uses: baptiste0928/cargo-install@f204293d9709061b7bc1756fec3ec4e2cd57dec0
         with:
           crate: diesel_cli
           features: postgres
           args: --no-default-features
 
       - name: Install Just
-        uses: taiki-e/install-action@v2
+        uses: taiki-e/install-action@4cef1412cce204788f482e778a0b9187f9626a29
         with:
           tool: just
           checksum: true
 
       - name: Install Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:
           node-version: "24"
 
@@ -707,7 +707,7 @@ jobs:
 
       - name: Upload server logs on failure
         if: failure()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: ${{ matrix.batch.server_logs_artifact }}
           path: ${{ env.SERVER_LOG_PATH }}
@@ -716,7 +716,7 @@ jobs:
 
       - name: Upload Cypress test results
         if: failure()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: ${{ matrix.batch.report_artifact_name }}
           path: |
@@ -859,25 +859,25 @@ jobs:
 
       - name: Checkout repository
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
 
       - name: Install Rust
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: dtolnay/rust-toolchain@master
+        uses: dtolnay/rust-toolchain@02cb101ec7c40f2c49e1d9714d64511d8e1b74de
         with:
           toolchain: stable 2 weeks ago
           components: rustfmt
 
       - name: Install sccache
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: taiki-e/install-action@v2
+        uses: taiki-e/install-action@4cef1412cce204788f482e778a0b9187f9626a29
         with:
           tool: sccache
           checksum: true
 
       - name: Download hyperswitch server artifact
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
           name: hyperswitch-server
           path: target/debug
@@ -919,7 +919,7 @@ jobs:
 
       - name: Install Diesel CLI
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: baptiste0928/cargo-install@v3.4.0
+        uses: baptiste0928/cargo-install@f204293d9709061b7bc1756fec3ec4e2cd57dec0
         with:
           crate: diesel_cli
           features: postgres
@@ -927,14 +927,14 @@ jobs:
 
       - name: Install Just
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: taiki-e/install-action@v2
+        uses: taiki-e/install-action@4cef1412cce204788f482e778a0b9187f9626a29
         with:
           tool: just
           checksum: true
 
       - name: Install Node.js
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:
           node-version: "24"
 
@@ -1049,7 +1049,7 @@ jobs:
 
       - name: Install uv
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: astral-sh/setup-uv@v8.3.2
+        uses: astral-sh/setup-uv@11f9893b081a58869d3b5fccaea48c9e9e46f990
 
       - name: Install mitmproxy dependencies
         if: ${{ env.RUN_TESTS == 'true' }}
@@ -1159,7 +1159,7 @@ jobs:
 
       - name: Upload MITM replay logs on failure
         if: env.RUN_TESTS == 'true' && failure()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: ${{ matrix.batch.server_logs_artifact }}-mitm-replay
           path: ${{ github.workspace }}/mitm-replay.log
@@ -1168,7 +1168,7 @@ jobs:
 
       - name: Upload server logs on failure
         if: env.RUN_TESTS == 'true' && failure()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: ${{ matrix.batch.server_logs_artifact }}
           path: ${{ env.SERVER_LOG_PATH }}
@@ -1177,7 +1177,7 @@ jobs:
 
       - name: Upload Cypress test results
         if: env.RUN_TESTS == 'true' && failure()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: ${{ matrix.batch.report_artifact_name }}
           path: |
@@ -1299,22 +1299,22 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
 
       - name: Install Rust
-        uses: dtolnay/rust-toolchain@master
+        uses: dtolnay/rust-toolchain@02cb101ec7c40f2c49e1d9714d64511d8e1b74de
         with:
           toolchain: stable 2 weeks ago
           components: rustfmt
 
       - name: Install sccache
-        uses: taiki-e/install-action@v2
+        uses: taiki-e/install-action@4cef1412cce204788f482e778a0b9187f9626a29
         with:
           tool: sccache
           checksum: true
 
       - name: Download hyperswitch server artifact
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
           name: hyperswitch-server
           path: target/debug
@@ -1352,20 +1352,20 @@ jobs:
           echo "CYPRESS_ADMINAPIKEY=${LOCAL_ADMIN_API_KEY}" >> $GITHUB_ENV
 
       - name: Install Diesel CLI
-        uses: baptiste0928/cargo-install@v3.4.0
+        uses: baptiste0928/cargo-install@f204293d9709061b7bc1756fec3ec4e2cd57dec0
         with:
           crate: diesel_cli
           features: postgres
           args: --no-default-features
 
       - name: Install Just
-        uses: taiki-e/install-action@v2
+        uses: taiki-e/install-action@4cef1412cce204788f482e778a0b9187f9626a29
         with:
           tool: just
           checksum: true
 
       - name: Install Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:
           node-version: "24"
 
@@ -1437,7 +1437,7 @@ jobs:
 
       - name: Upload server logs on failure
         if: env.RUN_TESTS == 'true' && failure()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: ${{ matrix.batch.server_logs_artifact }}
           path: ${{ env.SERVER_LOG_PATH }}
@@ -1446,7 +1446,7 @@ jobs:
 
       - name: Upload Cypress test results
         if: failure()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: ${{ matrix.batch.report_artifact_name }}
           path: |
@@ -1500,11 +1500,11 @@ jobs:
 
       - name: Checkout repository
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
 
       - name: Download hyperswitch server artifact
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
           name: hyperswitch-server
           path: target/debug
@@ -1529,21 +1529,21 @@ jobs:
 
       - name: Install Rust
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: dtolnay/rust-toolchain@master
+        uses: dtolnay/rust-toolchain@02cb101ec7c40f2c49e1d9714d64511d8e1b74de
         with:
           toolchain: stable 2 weeks ago
           components: rustfmt
 
       - name: Install sccache
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: taiki-e/install-action@v2
+        uses: taiki-e/install-action@4cef1412cce204788f482e778a0b9187f9626a29
         with:
           tool: sccache
           checksum: true
 
       - name: Install Diesel CLI
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: baptiste0928/cargo-install@v3.4.0
+        uses: baptiste0928/cargo-install@f204293d9709061b7bc1756fec3ec4e2cd57dec0
         with:
           crate: diesel_cli
           features: postgres
@@ -1551,14 +1551,14 @@ jobs:
 
       - name: Install Just
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: taiki-e/install-action@v2
+        uses: taiki-e/install-action@4cef1412cce204788f482e778a0b9187f9626a29
         with:
           tool: just
           checksum: true
 
       - name: Install Node.js
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:
           node-version: "24"
 
@@ -1671,7 +1671,7 @@ jobs:
 
       - name: Upload Cypress test results for Alpha Connectors
         if: env.RUN_TESTS == 'true' && failure()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: cypress-test-results-alpha
           path: |
@@ -1730,7 +1730,7 @@ jobs:
 
       - name: Checkout repository
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
 
       - name: Download Encrypted TOML from S3 and Decrypt
         if: ${{ env.RUN_TESTS == 'true' }}
@@ -1765,33 +1765,33 @@ jobs:
 
       - name: Install mold linker
         if: ${{ runner.os == 'Linux' && env.RUN_TESTS == 'true' }}
-        uses: rui314/setup-mold@v1
+        uses: rui314/setup-mold@10ca16bf91dc22e05ebdc935cad9c75ea248f621
         with:
           make-default: true
 
       - name: Install Rust
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: dtolnay/rust-toolchain@master
+        uses: dtolnay/rust-toolchain@02cb101ec7c40f2c49e1d9714d64511d8e1b74de
         with:
           toolchain: stable 2 weeks ago
           components: rustfmt
 
       - name: Install Protoc
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: arduino/setup-protoc@v3
+        uses: arduino/setup-protoc@c65c819552d16ad3c9b72d9dfd5ba5237b9c906b
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install sccache
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: taiki-e/install-action@v2
+        uses: taiki-e/install-action@4cef1412cce204788f482e778a0b9187f9626a29
         with:
           tool: sccache
           checksum: true
 
       - name: Install Diesel CLI
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: baptiste0928/cargo-install@v3.4.0
+        uses: baptiste0928/cargo-install@f204293d9709061b7bc1756fec3ec4e2cd57dec0
         with:
           crate: diesel_cli
           features: postgres
@@ -1799,21 +1799,21 @@ jobs:
 
       - name: Install grcov
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: taiki-e/install-action@v2
+        uses: taiki-e/install-action@4cef1412cce204788f482e778a0b9187f9626a29
         with:
           tool: grcov
           checksum: true
 
       - name: Install Just
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: taiki-e/install-action@v2
+        uses: taiki-e/install-action@4cef1412cce204788f482e778a0b9187f9626a29
         with:
           tool: just
           checksum: true
 
       - name: Install Node.js
         if: ${{ env.RUN_TESTS == 'true' }}
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:
           node-version: "24"
 
@@ -1898,7 +1898,7 @@ jobs:
 
       - name: Upload Cypress test results
         if: env.RUN_TESTS == 'true' && failure()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: cypress-v2-test-results
           path: |
@@ -1915,7 +1915,7 @@ jobs:
         run: grcov . --source-dir . --output-types lcov --output-path ${{ env.CODECOV_FILE }} --binary-path ./target/debug --keep-only "crates/*"
 
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v6
+        uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f
         if: ${{ env.RUN_TESTS == 'true' && github.event_name != 'merge_group' && (success() || failure()) }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

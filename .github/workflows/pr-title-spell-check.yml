@@ -1,3 +1,6 @@
+permissions:
+  contents: read
+
 name: PR Title Spell Check
 
 on:
@@ -13,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
 
       - name: Store PR title in a file
         shell: bash
@@ -22,6 +25,6 @@ jobs:
         run: echo $TITLE > pr_title.txt
 
       - name: Spell check
-        uses: crate-ci/typos@master
+        uses: crate-ci/typos@b41eb62e9a8096c9ba6636e2365d3f56018a203c
         with:
           files: ./pr_title.txt

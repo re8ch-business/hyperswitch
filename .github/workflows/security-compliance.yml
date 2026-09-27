@@ -1,0 +1,15 @@
+name: security-compliance
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  security-compliance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Check repository security files
+        run: |
+          python3 -m pip install 'PyYAML==6.0.2'
+          python3 .github/security/check_baseline.py --profile code
